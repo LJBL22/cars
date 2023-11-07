@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { addCar } from "./carsSlice";
 
 const formSlice = createSlice({
   name: "form",
@@ -14,7 +15,12 @@ const formSlice = createSlice({
       state.cost = action.payload; // 直接取到 initialState 去改，賦值鍵入的 number
     },
   },
-  // extraReducers
+  extraReducers(builder) {
+    builder.addCase(addCar, (state, action) => {
+      state.name = '';
+      state.cost = 0;
+    })
+  }
 })
 
 export const { changeName, changeCost } = formSlice.actions;

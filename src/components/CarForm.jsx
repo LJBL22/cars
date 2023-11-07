@@ -23,8 +23,6 @@ const CarForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(addCar({ name, cost })); // action.payload === { name: 'abc', cost: 14000 };
-    dispatch(changeName(''));
-    dispatch(changeCost(''));
   };
   return (
     <div className='car-form panel'>
