@@ -32,7 +32,7 @@ const CarForm = () => {
       <form onSubmit={handleSubmit}>
         <div className='field-group'>
           <div className='field'>
-            <label className='label'>Car Name</label>
+            <label className='label'>Name</label>
             <input
               className='input is-expanded'
               value={name || ''} // 避免出現預設
@@ -41,7 +41,7 @@ const CarForm = () => {
             />
           </div>
           <div className='field'>
-            <label className='label'>Value</label>
+            <label className='label'>Cost</label>
             <input
               className='input is-expanded'
               value={cost || ''} // 避免預設 0 的錯誤呈現
