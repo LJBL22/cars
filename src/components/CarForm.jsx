@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCost, changeName } from '../store'; // 4. import the creator fn
+import { addCar, changeCost, changeName } from '../store'; // 4. import the creator fn
 
 const CarForm = () => {
   const dispatch = useDispatch(); // 5. call hook to get access to dispatch fn
@@ -20,11 +20,14 @@ const CarForm = () => {
     // xx 無法，因為 input type="number" 已經避免掉這件事
     dispatch(changeCost(carCost));
   };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(addCar({ name, cost })); // action.payload === { name: 'abc', cost: 14000 };
+  };
   return (
-    // <form onSubmit={handleSubmit}>
     <div className='car-form panel'>
       <h4 className='subtitle is-3'>Add Car</h4>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className='field-group'>
           <div className='field'>
             <label className='label'>Car Name</label>
@@ -44,8 +47,10 @@ const CarForm = () => {
               type='number'
               min='0' // 沒效？
             />
-            <button>Add it!</button>
           </div>
+        </div>
+        <div className='field'>
+          <button className='button is-link'>Submit</button>
         </div>
       </form>
     </div>
