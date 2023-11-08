@@ -1,14 +1,29 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { removeCar } from '../store/slices/carsSlice';
+import { createSelector } from '@reduxjs/toolkit';
 
 const CarList = () => {
   const dispatch = useDispatch();
   // 與其讓名單跟 search 綁在一起 -> 正確做法：初始顯示的就是 filteredList
-  const carList = useSelector(({ cars: { searchTerm, carList } }) => {
-    return carList.filter((car) => {
-      return car.name.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-  });
+  // // short ver DOESN'T WORK
+  // const memoizedCars = createSelector(({ cars: { searchTerm, carList } }) => {
+  //   return carList.filter((car) =>
+  //     car.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+  // });
+
+  const memoizedCars = createSelector(
+    (state) => state.cars.carList,
+    (state) => state.cars.searchTerm,
+    (carList, searchTerm) => {
+      return carList.filter((car) =>
+        car.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+  );
+
+  const carList = useSelector(memoizedCars);
+
   //// 對照我的寫法：
   // const carList = useSelector((state) => {
   //   const data = state.cars.carList;

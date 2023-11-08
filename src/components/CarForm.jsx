@@ -1,14 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addCar, changeCost, changeName } from '../store'; // 4. import the creator fn
+import { createSelector } from '@reduxjs/toolkit';
 
 const CarForm = () => {
   const dispatch = useDispatch(); // 5. call hook to get access to dispatch fn
-  const { name, cost } = useSelector((state) => {
-    return {
-      name: state.form.name,
-      cost: state.form.cost,
-    };
-  });
+
+  const memoizedData = createSelector(
+    (state) => state.form.name,
+    (state) => state.form.cost,
+    (name, cost) => {
+      return { name, cost };
+    }
+  );
+  const { name, cost } = useSelector(memoizedData);
 
   const handleNameChange = (event) => {
     // 0. event handler (with event.target.value)
