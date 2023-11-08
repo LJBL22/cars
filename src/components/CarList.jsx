@@ -24,6 +24,15 @@ const CarList = () => {
 
   const carList = useSelector(memoizedCars);
 
+  const reminder = useSelector((state) => {
+    const inputText = state.form.name;
+    const data = state.cars.carList;
+    const matchList = data.filter((car) => {
+      if (car.name.toLowerCase() === inputText.toLowerCase()) {
+        return true;
+      }
+    });
+  });
   //// 對照我的寫法：
   // const carList = useSelector((state) => {
   //   const data = state.cars.carList;
@@ -41,7 +50,13 @@ const CarList = () => {
     return (
       <div key={car.id} className='panel'>
         <p>
-          {car.name} - ${car.cost}
+          {true ? (
+            <b>
+              {car.name} - ${car.cost}
+            </b>
+          ) : (
+            `${car.name} - $${car.cost}`
+          )}
         </p>
         <button
           className='button is-danger'
