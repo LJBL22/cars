@@ -4,11 +4,15 @@ const carsSlice = createSlice({
   name: "cars",
   initialState: {
     searchTerm: '',
-    carList: [] // 我自己覺得該改名，下面跟著又忘了代換
+    carList: []
   },
   reducers: {
     changeSearchTerm(state, action) {
-      state.searchTerm = action.payload; // 取到 initialState 去改，賦值
+      state.searchTerm = action.payload;
+      const filteredCarList = state.carList.filter((car) => {
+        return car.name.includes(state.searchTerm)
+      })
+      state.carList = filteredCarList;
     },
     addCar(state, action) {
       // assumption: 寫下來以記住 payload 的型態
