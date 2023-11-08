@@ -9,10 +9,6 @@ const carsSlice = createSlice({
   reducers: {
     changeSearchTerm(state, action) {
       state.searchTerm = action.payload;
-      const filteredCarList = state.carList.filter((car) => {
-        return car.name.includes(state.searchTerm)
-      })
-      state.carList = filteredCarList;
     },
     addCar(state, action) {
       // assumption: 寫下來以記住 payload 的型態
