@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeSearchTerm, removeCar } from '../store';
+import { changeSearchTerm } from '../store';
 
 const CarSearch = () => {
   const dispatch = useDispatch();

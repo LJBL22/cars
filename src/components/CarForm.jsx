@@ -19,9 +19,7 @@ const CarForm = () => {
     dispatch(changeName(event.target.value)); // 6. some event happened, call action creator (to get an action) -> payload as arg -> dispatch it
   };
   const handleCostChange = (event) => {
-    const carCost = parseInt(event.target.value) || 0;
-    // abc1234 似乎可以通過... 也許 Number比較好? 或著這是後端在驗證的
-    // xx 無法，因為 input type="number" 已經避免掉這件事
+    const carCost = parseInt(event.target.value) || 0; // a habit to prevent uncontrollable browser behaviour
     dispatch(changeCost(carCost));
   };
   const handleSubmit = (event) => {
@@ -49,7 +47,6 @@ const CarForm = () => {
               value={cost || ''} // 避免預設 0 的錯誤呈現
               onChange={handleCostChange}
               type='number'
-              min='0' // 沒效？
             />
           </div>
         </div>
